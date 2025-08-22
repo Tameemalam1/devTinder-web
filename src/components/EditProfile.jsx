@@ -42,58 +42,96 @@ const EditProfile = ({user}) => {
         }
     }
 
-  return (
-    <>
-        <div className='flex justify-center my-10'>
-            <div className='flex justify-center mx-10'>
-                <div className="card bg-base-300 w-96 shadow-sm">
-                    <div className="card-body">
-                        <h2 className="card-title justify-center">Edit Profile</h2>
-                        <div>
-                        <fieldset className="fieldset">
-                                <legend className="fieldset-legend">First Name</legend>
-                                <input type="text" value={firstName} className="input" onChange={(e) => setFirstName(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset my-2">
-                                <legend className="fieldset-legend">Last Name</legend>
-                                <input type="text" value={lastName} className="input" onChange={(e) => setLastName(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset my-2">
-                                <legend className="fieldset-legend">Photo Url</legend>
-                                <input type="text" value={photoUrl} className="input" onChange={(e) => setPhotoUrl(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset my-2">
-                                <legend className="fieldset-legend">Age</legend>
-                                <input type="text" value={age} className="input" onChange={(e) => setAge(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset my-2">
-                                <legend className="fieldset-legend">Gender</legend>
-                                <input type="text" value={gender} className="input" onChange={(e) => setGender(e.target.value)} />
-                            </fieldset>
-                            <fieldset className="fieldset my-2">
-                                <legend className="fieldset-legend">About</legend>
-                                <input type="text" value={about} className="input" onChange={(e) => setAbout(e.target.value)} />
-                            </fieldset>
-                        </div>
-                        <p className='text-red-500'>{error}</p>
-                        <div className="card-actions justify-center">
-                        <button className="btn btn-primary" onClick={saveProfile}>Save Profile</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    return (
+    <div
+      className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center relative px-4"
+      style={{
+        backgroundImage:
+          "url('https://png.pngtree.com/thumb_back/fh260/background/20190727/pngtree-openwork-round-hole-metal-texture-black-red-background-image_285741.jpg')",
+      }}
+    >
+      {/* 🔴 Overlay (light red + black gradient) */}
+      <div className="absolute inset-0 bg-black/70 bg-gradient-to-br from-red-800/40 via-black/60 to-red-900/30"></div>
 
-            <UserCard user= {{firstName,lastName,photoUrl,age,gender,about}}/>
+      <div className="relative z-10 bg-black/80 p-8 rounded-xl shadow-lg w-full max-w-5xl flex flex-col md:flex-row gap-8">
+        
+        {/* ===== Form Section ===== */}
+        <div className="flex-1 bg-gray-900/80 p-6 rounded-lg">
+          <h2 className="text-3xl font-bold text-red-500 mb-6 text-center">
+            Edit Profile
+          </h2>
+          <div className="space-y-4">
+            <input
+              type="text"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="First Name"
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            />
+            <input
+              type="text"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Last Name"
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            />
+            <input
+              type="text"
+              value={photoUrl}
+              onChange={(e) => setPhotoUrl(e.target.value)}
+              placeholder="Profile Photo URL"
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            />
+            <input
+              type="number"
+              value={age}
+              onChange={(e) => setAge(e.target.value)}
+              placeholder="Age"
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            />
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            >
+              <option value="">Select Gender</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+            </select>
+            <textarea
+              value={about}
+              onChange={(e) => setAbout(e.target.value)}
+              placeholder="About you..."
+              className="w-full p-3 rounded bg-black text-white border border-red-500 focus:ring focus:ring-red-600"
+            />
+            <button
+              onClick={saveProfile}
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+            >
+              Save Profile
+            </button>
+          </div>
         </div>
-        {showToast && (
-            <div className="toast toast-top toast-center">
-            <div className="alert alert-success">
-                <span>Profile saved successfully.</span>
-            </div>
-            </div>
-        )}
-    </>
-  )
+
+        {/* ===== UserCard Preview ===== */}
+        <div className="flex-1 flex items-center justify-center">
+          <UserCard
+            user={{ firstName, lastName, photoUrl, age, gender, about }}
+          />
+        </div>
+      </div>
+
+      {/* ===== Toast Notification ===== */}
+      {showToast && (
+        <div className="toast toast-top toast-center">
+          <div className="alert alert-success bg-red-600 text-white font-semibold">
+            <span>Profile saved successfully.</span>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default EditProfile

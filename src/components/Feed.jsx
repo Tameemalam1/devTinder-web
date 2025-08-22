@@ -27,15 +27,28 @@ const Feed = () => {
 
   if (!feed) return;
 
-  if (feed.length <= 0) return <h1 className='flex justify-center my-10'>No New users found</h1>
-
   return (
-     feed && (
-      <div className="flex justify-center my-10">
+  <div
+    className="relative min-h-screen flex items-center justify-center bg-cover bg-center"
+    style={{
+      backgroundImage: `url('https://png.pngtree.com/thumb_back/fh260/background/20190727/pngtree-openwork-round-hole-metal-texture-black-red-background-image_285741.jpg')`,
+    }}
+  >
+    {/* Black overlay */}
+    <div className="absolute inset-0 bg-black bg-opacity-70"></div>
+
+    {/* Content */}
+    <div className="relative z-10 my-10">
+      {feed.length > 0 ? (
         <UserCard user={feed[0]} />
-      </div>
-    )
-  );
+      ) : (
+        <h1 className="text-white text-3xl font-bold">
+          No New Users Found
+        </h1>
+      )}
+    </div>
+  </div>
+);
 };
 
 export default Feed
